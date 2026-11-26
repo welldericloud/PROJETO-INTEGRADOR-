@@ -2,11 +2,11 @@
 import sqlite3
 
 try:
-    # Criação do Banco de Dados - Eventos (Integrante 7)
+    # Criação do Banco de Dados Evebtos
     conexao = sqlite3.connect('bd_geral.db')
     cursor = conexao.cursor()
 
-    # Criando Tabela de EVENTOS
+    # Criando Tabela
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS eventos (
             id_evento INTEGER PRIMARY KEY AUTOINCREMENT,

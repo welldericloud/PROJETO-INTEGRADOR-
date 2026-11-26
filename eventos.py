@@ -2,7 +2,7 @@
 import sqlite3
 
 try:
-    # Criação do Banco de Dados Evebtos
+    # Criação do Banco de Dados Eventos
     conexao = sqlite3.connect('bd_geral.db')
     cursor = conexao.cursor()
 

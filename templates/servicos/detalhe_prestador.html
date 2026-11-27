@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ prestador.nome_exibicao }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <a href="{% url 'servicos:lista_prestadores' %}" class="small">&larr; Voltar para a lista</a>
+
+  <div class="card shadow-sm mt-3">
+    <div class="card-body">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        {% if prestador.usuario.foto %}
+          <img src="{{ prestador.usuario.foto.url }}" alt="{{ prestador.nome_exibicao }}"
+               class="rounded-circle" width="80" height="80" style="object-fit: cover;">
+        {% endif %}
+        <div>
+          <h1 class="h3 mb-1">{{ prestador.nome_exibicao }}</h1>
+          <span class="badge bg-secondary">{{ prestador.categoria }}</span>
+        </div>
+      </div>
+
+      <h2 class="h6">Sobre</h2>
+      <p>{{ prestador.descricao|linebreaksbr }}</p>
+
+      <h2 class="h6">Especialidades</h2>
+      <p>
+        {% for esp in prestador.lista_especialidades %}
+          <span class="badge bg-light text-dark border">{{ esp }}</span>
+        {% endfor %}
+      </p>
+
+      <h2 class="h6">Bairros atendidos</h2>
+      <p>{{ prestador.bairros_atendidos }}</p>
+
+      {% if prestador.valor_medio %}
+        <h2 class="h6">Valor médio</h2>
+        <p>R$ {{ prestador.valor_medio }}</p>
+      {% endif %}
+
+      {% url 'servicos:agendar' prestador.pk as agendar_url %}
+      {% if agendar_url %}
+        <a href="{{ agendar_url }}" class="btn btn-primary">Solicitar agendamento</a>
+      {% else %}
+        <button class="btn btn-primary" disabled>Solicitar agendamento (em breve)</button>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
